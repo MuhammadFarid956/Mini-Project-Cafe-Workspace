@@ -36,7 +36,7 @@ def load_data_transaksi():
 
 # lookup paket
 def lookup_paket(id_paket):
-    with open('master_paket.csv', mode='r') as paket_file:
+    with open('data_paket.csv', mode='r') as paket_file:
         reader = csv.reader(paket_file)
         for row in reader:
             if row[0] == id_paket:
@@ -45,7 +45,7 @@ def lookup_paket(id_paket):
 
 # Lookup menu 
 def lookup_menu(id_menu):
-    with open('master_menu.csv', mode='r') as menu_file:
+    with open('data_menu.csv', mode='r') as menu_file:
         reader = csv.reader(menu_file)
         for row in reader:
             if row[0] == id_menu:
