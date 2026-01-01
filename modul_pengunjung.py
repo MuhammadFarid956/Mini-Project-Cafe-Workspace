@@ -39,10 +39,27 @@ def tampilkan_pengunjung():
         for row in reader:
             print(f'{row[0]:<5} | {row[1]:<20} | {row[2]:<15} | {row[3]:<20} ')
 
+# Generate ID Pengunjung otomatis
+def next_id_pengunjung():
+    last_num = 0
+    try:
+        with open(FILENAME, mode='r') as pengunjung_file:
+            reader = csv.reader(pengunjung_file)
+            next(reader, None) #skip header
+            for row in reader:
+                kode = row[0]
+                if kode.startswith('PG'):
+                    num = int(kode.replace('PG',''))
+                    if num > last_num:
+                        last_num = num
+    except FileNotFoundError:
+        pass
+    return f'PG{last_num+1:03d}'
+
 # Tambah Pengunjung Baru
 def tambah_pengunjung():
     print('\n===== Tambah Pengunjung Baru =====')
-    id_pengunjung = input('Masukkan ID Pengunjung : ').upper()
+    id_pengunjung = next_id_pengunjung()
     nama_pengunjung = input('Masukkan Nama Pengunjung : ')
     no_hp = input('Masukkan No HP Pengunjung : ')
     instansi = input('Masukkan Instansi Pengunjung : ')
@@ -52,6 +69,7 @@ def tambah_pengunjung():
         writer = csv.writer(pengunjung_file)
         writer.writerow([id_pengunjung, nama_pengunjung, no_hp, instansi])
         print('Pengunjung Berhasi Ditambahkan!\n')
+    return id_pengunjung
 
 # Hapus Pengunjung
 def hapus_pengunjung():

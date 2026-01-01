@@ -1,6 +1,6 @@
 import profil
 import master_data
-import transaksi
+import modul_transaksi
 
 def main_menu():
     while True:
@@ -16,9 +16,9 @@ def main_menu():
         elif pilih == '2':
             master_data.master_data()
         elif pilih == '3':
-            transaksi.transaksi_kunjungan()
+            modul_transaksi.transaksi_kunjungan()
         elif pilih == '4':
-            print('Terimakasi, Sampai Jumpa.')
+            print('Terimakasih, Sampai Jumpa.')
             break
         else:
             print('Input Tidak Valid!')

@@ -1,6 +1,7 @@
 import csv
 import datetime
 import os
+from modul_pengunjung import tambah_pengunjung
 
 FILENAME = 'data_transaksi.csv'
 
@@ -34,7 +35,7 @@ def transaksi_kunjungan():
     init_file()
     id_transaksi = datetime.datetime.now().strftime('T%y%m%d%H%M%S')
     tanggal = datetime.date.today().isoformat()
-    id_pengunjung = input('Masukkan ID Pengunjung : ').upper()
+    id_pengunjung = tambah_pengunjung()
     id_paket = input('Masukkan ID Paket : ').upper()
     jumlah_orang = int(input('Masukkan Jumlah Orang : '))
 
@@ -67,5 +68,5 @@ def transaksi_kunjungan():
         writer.writerow([id_transaksi, tanggal, id_pengunjung, id_paket, jenis_paket, jumlah_orang, item_menu, total])
     print(f'Transaksi berhasi! Total yang harus dibayar : Rp {total:,}')
 
-
 transaksi_kunjungan()
+
