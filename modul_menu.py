@@ -60,8 +60,7 @@ def tambah_menu():
             print('Nama menu tidak boleh kosong')
             continue
         harga_menu = int(input('Masukkan Harga Menu : '))
-        if len(harga_menu <0):
-            print('harga tidak boleh kosong')
+       
 
         # Tulis data menu ke file CSV
         with open(FILENAME, mode='a', newline='') as menu_file:
