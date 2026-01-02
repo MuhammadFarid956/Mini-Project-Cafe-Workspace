@@ -11,7 +11,7 @@ def master_data():
             pilihan = input('Pilih Master Data yang ingin diakses (1-4) : ')
             if pilihan == '1':
                 print('\n===== Master Menu =====')
-                print('1. Tampilkan Menu\n2. Tambah Menu\n3.Update Menu\n4. Hapus Menu\n5. Kembali\n')
+                print('1. Tampilkan Menu\n2. Tambah Menu\n3. Update Menu\n4. Hapus Menu\n5. Kembali\n')
                 pilih = input('Pilih Master Menu (1/2/3/4/5) : ')
                 if pilih == '1':
                     modul_menu.tampilkan_menu()

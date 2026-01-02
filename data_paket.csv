@@ -1,4 +1,5 @@
-P001,Short Time,sewa,0,1,3,8000
-P002,Harian,sewa,0,1,24,15000
+P001,Short Time,sewa,0,1,3,5000
+P002,Harian,sewa,0,1,24,10000
 P003,Single,non sewa,15000,1,24,0
 P004,Couple,non sewa,12000,2,24,0
+P005,Group,non sewa,10000,3,24,0

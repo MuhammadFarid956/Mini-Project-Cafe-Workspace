@@ -26,19 +26,6 @@ def load_data_pengunjung():
         print(f'File {FILENAME} tidak ditemukan.')
     return data_pengunjung 
 
-# Tampilkan Daftar Pengunjung
-def tampilkan_pengunjung():
-    print('\n============== Daftar Pengunjung ==============')
-    if not os.path.exists(FILENAME):
-        print('Pengunjung Kosong')
-        return
-    with open(FILENAME, mode='r') as pengunjung_file:
-        reader = csv.reader(pengunjung_file)
-        print(f'{"ID":<5} | {"Nama Pengunjung":<20} | {"No HP":<15} | {"Instansi":<20}')
-        print('-' * 70)
-        for row in reader:
-            print(f'{row[0]:<5} | {row[1]:<20} | {row[2]:<15} | {row[3]:<20} ')
-
 # Generate ID Pengunjung otomatis
 def next_id_pengunjung():
     last_num = 0
@@ -55,6 +42,20 @@ def next_id_pengunjung():
     except FileNotFoundError:
         pass
     return f'PG{last_num+1:03d}'
+
+# Tampilkan Daftar Pengunjung
+def tampilkan_pengunjung():
+    print('\n============== Daftar Pengunjung ==============')
+    if not os.path.exists(FILENAME):
+        print('Pengunjung Kosong')
+        return
+    with open(FILENAME, mode='r') as pengunjung_file:
+        reader = csv.reader(pengunjung_file)
+        print(f'{"ID":<5} | {"Nama Pengunjung":<20} | {"No HP":<15} | {"Instansi":<20}')
+        print('-' * 70)
+        for row in reader:
+            print(f'{row[0]:<5} | {row[1]:<20} | {row[2]:<15} | {row[3]:<20} ')
+
 
 # Tambah Pengunjung Baru
 def tambah_pengunjung():

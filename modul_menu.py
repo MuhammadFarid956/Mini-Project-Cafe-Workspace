@@ -20,6 +20,24 @@ def load_data_menu():
         print(f'File {FILENAME} tidak ditemukan.')
     return data_menu
 
+# Generate ID Menu 
+def next_id_menu():
+    last_num = 0
+    try:
+        with open(FILENAME, mode='r') as menu_file:
+            reader = csv.reader(menu_file)
+            next(reader, None) #Skip Heade
+            for row in reader:
+                kode = row[0]
+                if kode.startswith('M'):
+                    num = int(kode.replace('M',''))
+                    if num > last_num:
+                        last_num = num
+    except FileNotFoundError:
+        pass
+    return f'M{last_num+1:03d}'
+
+# Tampilkan Menu
 def tampilkan_menu():
     print('\n============== Daftar Menu ==============')
     if not os.path.exists(FILENAME):
@@ -32,12 +50,13 @@ def tampilkan_menu():
         for row in reader:
             print(f'{row[0]:<5} | {row[1]:<20} | Rp {int(row[2]):,}')
 
+# Tambah Menu
 def tambah_menu():
     print('\n===== Tambah Menu Baru =====')
-    id_menu = input('Masukkan ID Menu : ').upper()
+    id_menu = next_id_menu()
     nama_menu = input('Masukkan Nama Menu : ')
     harga_menu = int(input('Masukkan Harga Menu : '))
-
+    
     # Tulis data menu ke file CSV
     with open(FILENAME, mode='a', newline='') as menu_file:
         writer = csv.writer(menu_file)
@@ -127,3 +146,4 @@ def hapus_menu():
     else:
         print('ID Menu tidak ditemukan.\n')
 
+tambah_menu()

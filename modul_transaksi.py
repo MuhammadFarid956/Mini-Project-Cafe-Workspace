@@ -2,7 +2,8 @@ import csv
 import datetime
 import os
 from modul_pengunjung import tambah_pengunjung
-
+from modul_paket import tampilkan_paket
+from modul_menu import tampilkan_menu
 FILENAME = 'data_transaksi.csv'
 
 # Pastikan file ada
@@ -36,6 +37,7 @@ def transaksi_kunjungan():
     id_transaksi = datetime.datetime.now().strftime('T%y%m%d%H%M%S')
     tanggal = datetime.date.today().isoformat()
     id_pengunjung = tambah_pengunjung()
+    tampilkan_paket()
     id_paket = input('Masukkan ID Paket : ').upper()
     jumlah_orang = int(input('Masukkan Jumlah Orang : '))
 
@@ -50,6 +52,7 @@ def transaksi_kunjungan():
     if jenis_paket == 'non sewa' :
         min_per_orang = int(paket[3])
         min_total = min_per_orang * jumlah_orang
+        tampilkan_menu()
         print(f'Minimum Pesanan : Rp {min_total:,}')
         items = input('Masukkan ID Menu yang dipesan (pisahkan dengan koma) : ').strip().upper()
         item_ids = [x.strip() for x in items.split(',') if x.strip()]
@@ -67,6 +70,4 @@ def transaksi_kunjungan():
         writer = csv.writer(file_transaksi)
         writer.writerow([id_transaksi, tanggal, id_pengunjung, id_paket, jenis_paket, jumlah_orang, item_menu, total])
     print(f'Transaksi berhasi! Total yang harus dibayar : Rp {total:,}')
-
-
 
