@@ -84,4 +84,3 @@ def transaksi_kunjungan():
         writer.writerow([id_transaksi, tanggal, id_pengunjung, id_paket, jenis_paket, jumlah_orang, item_menu, total])
     print(f'Transaksi berhasi! Total yang harus dibayar : Rp {total:,}')
 
-tampilkan_transaksi()

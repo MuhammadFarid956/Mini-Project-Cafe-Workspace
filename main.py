@@ -7,7 +7,7 @@ def main_menu():
         print('\n=== Cafe and Workspace ===')
         print('1. Profil Mahasiswa')
         print('2. Master Data')
-        print('3. Transaksi')
+        print('3. Menu Transaksi')
         print('4. Keluar')
         pilih = input('Silahkan Pilih (1/2/3) : ')
 
@@ -16,7 +16,18 @@ def main_menu():
         elif pilih == '2':
             master_data.master_data()
         elif pilih == '3':
-            modul_transaksi.transaksi_kunjungan()
+            print('\n===== Transaksi =====')
+            print('\n1. Cashier\n2. Laporan Transaksi\n3. Kembali')
+            pilih = input('Silahkan Pilih (1/2/3)')
+            if pilih == '1':
+                modul_transaksi.transaksi_kunjungan()
+            elif pilih == '2':
+                modul_transaksi.tampilkan_transaksi()
+            elif pilih == '3':
+                continue
+            else:
+                print('Input Salah, silahkan coba lagi!')
+                continue  
         elif pilih == '4':
             print('Terimakasih, Sampai Jumpa.')
             break

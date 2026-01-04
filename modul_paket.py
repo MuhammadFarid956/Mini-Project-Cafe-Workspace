@@ -67,7 +67,7 @@ def tambah_paket():
         id_paket = gen_id_paket()
         nama_paket = input('Masukkan Nama Paket : ')
         jenis = input('Masukkan jenis Paket (sewa/non sewa) : ')
-        min_per_orang = input('Minimum / Orang (isi 0 jika sewa): ')
+        min_per_orang = int(input('Minimum / Orang (isi 0 jika sewa): '))
         kapasitas = input('Masukkan Kapasitas Paket : ')
         durasi = input('Masukkan Durasi Paket (jam) : ')
         harga_sewa = int(input('Masukkan Harga Sewa Paket (Masukkan 0 jika non sewa): '))

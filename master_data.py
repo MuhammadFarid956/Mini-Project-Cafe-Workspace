@@ -25,7 +25,7 @@ def master_data():
                     continue
                 else:
                     print('Input tidak valid, silahkan input (1/2/3/4/5)!')
-            if pilihan == '2':
+            elif pilihan == '2':
                 print('\n===== Master Paket =====')
                 print('1.Tampilkan Paket\n2. Tambah Paket\n3. Update Paket\n4. Hapus Paket\n5. Kembali')
                 pilih = input('Pilih Master Paket (1/2/3/4/5) : ')
@@ -42,7 +42,7 @@ def master_data():
                     continue
                 else:
                     print('Input tidak valid, silahkan input (1/2/3/4/5) : ')
-            if pilihan == '3':
+            elif pilihan == '3':
                 print('\n===== Master Pengunjung =====')
                 print('1. Tampilkan Pengunjung\n2. Tambah Pengunjung\n3. Hapus Pengunjung\n4. Kembali')
                 pilih = input('Pilih Master Pengunjung (1/2/3/4) : ')
@@ -59,8 +59,8 @@ def master_data():
             elif pilihan == '4':
                 return
             else:
-                print('Input tidak valid, silahkan input (1/2/3/4) : ')                
+                print('Input tidak valid, silahkan input (1/2/3/4) else : ')                
     except ValueError:
-        print('Input tidak valid!')
+        print('Input Tidak Valid')
         return
 
