@@ -52,20 +52,16 @@ def tampilkan_menu():
 
 # Tambah Menu
 def tambah_menu():
-    while True:
-        print('\n===== Tambah Menu Baru =====')
-        id_menu = next_id_menu()
-        nama_menu = input('Masukkan Nama Menu : ')
-        if not nama_menu:
-            print('Nama menu tidak boleh kosong')
-            continue
-        harga_menu = int(input('Masukkan Harga Menu : '))
+    print('\n===== Tambah Menu Baru =====')
+    id_menu = next_id_menu()
+    nama_menu = input('Masukkan Nama Menu : ')
+    harga_menu = int(input('Masukkan Harga Menu : '))
 
-        # Tulis data menu ke file CSV
-        with open(FILENAME, mode='a', newline='') as menu_file:
-            writer = csv.writer(menu_file)
-            writer.writerow([id_menu, nama_menu, harga_menu])
-        print('Menu Berhasil Ditambahkan!\n')
+    # Tulis data menu ke file CSV
+    with open(FILENAME, mode='a', newline='') as menu_file:
+        writer = csv.writer(menu_file)
+        writer.writerow([id_menu, nama_menu, harga_menu])
+    print('Menu Berhasil Ditambahkan!\n')
 
 def update_menu():
     print('\n===== Update Menu =====')
@@ -150,4 +146,3 @@ def hapus_menu():
     else:
         print('ID Menu tidak ditemukan.\n')
 
-tambah_menu()

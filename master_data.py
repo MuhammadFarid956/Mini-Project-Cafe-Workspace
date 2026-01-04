@@ -61,7 +61,6 @@ def master_data():
             else:
                 print('Input tidak valid, silahkan input (1/2/3/4) : ')                
     except ValueError:
-        print('Input tidak valid! tes')
+        print('Input tidak valid!')
         return
 
-master_data()

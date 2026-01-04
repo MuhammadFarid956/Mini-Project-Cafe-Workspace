@@ -5,7 +5,7 @@ FILENAME = 'data_paket.csv'
 
 # Pastikan file ada
 def load_data_paket():
-    data_paket = []
+    data_paket = {}
 
     try:
         with open(FILENAME, mode='r') as paket_file:
@@ -32,39 +32,56 @@ def load_data_paket():
         print(f'File {FILENAME} tidak ditemukan.')
     return data_paket 
 
+# Generate ID Paket
+def gen_id_paket():
+    last_num = 0
+    try:
+        with open(FILENAME, mode='r') as paket_file:
+            reader = csv.reader(paket_file)
+            for row in reader:
+                kode = row[0]
+                if kode.startswith('P'):
+                    num = int(kode.replace('P',''))
+                    if num > last_num:
+                        last_num = num
+    except FileNotFoundError:
+        pass
+    return f'P{last_num+1:03d}'
+
 # Tampilkan Daftar Paket
 def tampilkan_paket():
-    print('\n============== Daftar Paket ==============')
+    print('\n============================================== Daftar Paket ==============================================')
     if not os.path.exists(FILENAME):
         print('Paket Kosong')
         return 
     with open(FILENAME, mode='r') as paket_file:
         reader = csv.reader(paket_file)
         print(f'{"ID":<5} | {"Nama Paket":<20} | {"Jenis":<10} | {"Min Pesanan/Orang":<12} | {"Kapasitas":<10} | {"Durasi (jam)":<12} | {"Harga Sewa":>12}')
-        print('=' * 95)
+        print('=' * 106)
         for row in reader:
             print(f'{row[0]:<5} | {row[1]:<20} | {row[2]:<10} | Rp {int(row[3]):<14,} | {row[4]:<10} | {row[5]:<12} | Rp {int(row[6]):,}')
 
 # Tambah Paket Baru
 def tambah_paket():
-    print('\n===== Tambah Paket Baru =====')
-    id_paket = input('Masukkan ID Paket : ').upper()
-    nama_paket = input('Masukkan Nama Paket : ')
-    jenis = input('Masukkan jenis Paket (sewa/non sewa) : ')
-    min_per_orang = input('Minimum / Orang (isi 0 jika sewa): ')
-    kapasitas = input('Masukkan Kapasitas Paket : ')
-    durasi = input('Masukkan Durasi Paket (jam) : ')
-    harga_sewa = int(input('Masukkan Harga Sewa Paket (Masukkan 0 jika non sewa): '))
+        print('\n===== Tambah Paket Baru =====')
+        id_paket = gen_id_paket()
+        nama_paket = input('Masukkan Nama Paket : ')
+        jenis = input('Masukkan jenis Paket (sewa/non sewa) : ')
+        min_per_orang = input('Minimum / Orang (isi 0 jika sewa): ')
+        kapasitas = input('Masukkan Kapasitas Paket : ')
+        durasi = input('Masukkan Durasi Paket (jam) : ')
+        harga_sewa = int(input('Masukkan Harga Sewa Paket (Masukkan 0 jika non sewa): '))
 
-    # Tulis data paket ke file CSV
-    with open(FILENAME, mode='a', newline='') as paket_file:
-        writer = csv.writer(paket_file)
-        writer.writerow([id_paket, nama_paket, jenis, min_per_orang, kapasitas, durasi, harga_sewa])
-        print('Paket Berhasil Ditambahkan!\n')
+        # Tulis data paket ke file CSV
+        with open(FILENAME, mode='a', newline='') as paket_file:
+            writer = csv.writer(paket_file)
+            writer.writerow([id_paket, nama_paket, jenis, min_per_orang, kapasitas, durasi, harga_sewa])
+            print('Paket Berhasil Ditambahkan!\n')
+        
 
 # Update Paket
 def update_paket():
-    print('\n===== Update Paket =====')
+    print('\n============================================== Update Paket ==============================================')
     tampilkan_paket()
 
     kode_paket = input('Masukkan ID Paket yang ingin diupdate : ').upper()
@@ -87,7 +104,6 @@ def update_paket():
                     kapasitas_baru = input('Masukkan Kapasitas Paket Baru : ')
                     durasi_baru = input('Masukkan Durasi Paket Baru (jam) : ')
                     harga_baru = input('Masukkan Harga Sewa Paket Baru : ')
-
 
                     # Logika jika input kosong, maka data lama  dipertahankan
                     if len(nama_baru) > 0:
