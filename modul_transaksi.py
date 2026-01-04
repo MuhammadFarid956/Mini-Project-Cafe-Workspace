@@ -4,6 +4,7 @@ import os
 from modul_pengunjung import tambah_pengunjung
 from modul_paket import tampilkan_paket
 from modul_menu import tampilkan_menu
+
 FILENAME = 'data_transaksi.csv'
 
 # Pastikan file ada
@@ -30,6 +31,18 @@ def lookup_menu(id_menu):
             if row[0] == id_menu:
                 return int(row[2])
     return 0
+
+# Tampilkan Laporan Transaksi
+def tampilkan_transaksi():
+    print('\n===== Laporan Transaksi =====')
+    if not os.path.exists(FILENAME):
+        print('Transaksi Kosong')
+    with open(FILENAME, mode='r') as file_transaksi:
+        reader = csv.reader(file_transaksi)
+        print(f'{'ID':<14} | {'Tanggal':<11} | {'ID Pengunjung':<6} | {'ID Paket':<5} | {'Jenis':<9} | {'jumlah (org)':<2} | {'Items':<20} | {'Total':>7}')
+        print('-' * 100)
+        for row in reader:
+            print(f'{row[0]:<14} | {row[1]:<11} | {row[2]:<13} | {row[3]:<8} | {row[4]:<9} | {row[5]:<12} | {row[6]:<20} | Rp {int(row[7]):,}')
 
 # Transaksi Kunjungan
 def transaksi_kunjungan():
@@ -71,3 +84,4 @@ def transaksi_kunjungan():
         writer.writerow([id_transaksi, tanggal, id_pengunjung, id_paket, jenis_paket, jumlah_orang, item_menu, total])
     print(f'Transaksi berhasi! Total yang harus dibayar : Rp {total:,}')
 
+tampilkan_transaksi()
