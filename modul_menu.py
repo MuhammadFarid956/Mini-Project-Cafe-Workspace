@@ -26,7 +26,7 @@ def next_id_menu():
     try:
         with open(FILENAME, mode='r') as menu_file:
             reader = csv.reader(menu_file)
-            next(reader, None) #Skip Heade
+            next(reader, None) #Skip Header
             for row in reader:
                 kode = row[0]
                 if kode.startswith('M'):
