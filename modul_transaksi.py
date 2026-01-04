@@ -58,10 +58,10 @@ def transaksi_kunjungan():
     if not paket:
         print('Paket tidak ditemukan!')
         return
+    
     jenis_paket = paket[2]
     total = 0
     item_menu = ''
-
     if jenis_paket == 'non sewa' :
         min_per_orang = int(paket[3])
         min_total = min_per_orang * jumlah_orang
