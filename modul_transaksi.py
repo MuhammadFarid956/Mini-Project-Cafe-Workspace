@@ -43,44 +43,49 @@ def tampilkan_transaksi():
         print('-' * 100)
         for row in reader:
             print(f'{row[0]:<14} | {row[1]:<11} | {row[2]:<13} | {row[3]:<8} | {row[4]:<9} | {row[5]:<12} | {row[6]:<20} | Rp {int(row[7]):,}')
+            
 
 # Transaksi Kunjungan
 def transaksi_kunjungan():
-    init_file()
-    id_transaksi = datetime.datetime.now().strftime('T%y%m%d%H%M%S')
-    tanggal = datetime.date.today().isoformat()
-    id_pengunjung = tambah_pengunjung()
-    tampilkan_paket()
-    id_paket = input('Masukkan ID Paket : ').upper()
-    jumlah_orang = int(input('Masukkan Jumlah Orang : '))
+    try:
+        init_file()
+        id_transaksi = datetime.datetime.now().strftime('T%y%m%d%H%M%S')
+        tanggal = datetime.date.today().isoformat()
+        id_pengunjung = tambah_pengunjung()
+        tampilkan_paket()
+        id_paket = input('Masukkan ID Paket : ').upper()
+        jumlah_orang = int(input('Masukkan Jumlah Orang : '))
 
-    paket = lookup_paket(id_paket)
-    if not paket:
-        print('Paket tidak ditemukan!')
-        return
-    
-    jenis_paket = paket[2]
-    total = 0
-    item_menu = ''
-    if jenis_paket == 'non sewa' :
-        min_per_orang = int(paket[3])
-        min_total = min_per_orang * jumlah_orang
-        tampilkan_menu()
-        print(f'Minimum Pesanan : Rp {min_total:,}')
-        items = input('Masukkan ID Menu yang dipesan (pisahkan dengan koma) : ').strip().upper()
-        item_ids = [x.strip() for x in items.split(',') if x.strip()]
-        item_menu = ';'.join(item_ids)
-        for mid in item_ids:
-            total += lookup_menu(mid)
-        if total < min_total:
-            print(f'Total Rp {total:,} kurang dari minimum pesanan Rp {min_total:,}. Transaksi dibatalkan.')
+        paket = lookup_paket(id_paket)
+        if not paket:
+            print('Paket tidak ditemukan!')
             return
-    else:
-        total = int(paket[6])
+    
+        jenis_paket = paket[2]
+        total = 0
+        item_menu = ''
+        if jenis_paket == 'non sewa' :
+            min_per_orang = int(paket[3])
+            min_total = min_per_orang * jumlah_orang
+            tampilkan_menu()
+            print(f'Minimum Pesanan : Rp {min_total:,}')
+            items = input('Masukkan ID Menu yang dipesan (pisahkan dengan koma) : ').strip().upper()
+            item_ids = [x.strip() for x in items.split(',') if x.strip()]
+            item_menu = ';'.join(item_ids)
+            for mid in item_ids:
+                total += lookup_menu(mid)
+            if total < min_total:
+                print(f'Total Rp {total:,} kurang dari minimum pesanan Rp {min_total:,}. Transaksi dibatalkan.')
+                return
+        else:
+            total = int(paket[6]) * jumlah_orang
 
-    # Simpan data transaksi ke file CSV
-    with open(FILENAME, mode='a', newline='') as file_transaksi:
-        writer = csv.writer(file_transaksi)
-        writer.writerow([id_transaksi, tanggal, id_pengunjung, id_paket, jenis_paket, jumlah_orang, item_menu, total])
-    print(f'Transaksi berhasi! Total yang harus dibayar : Rp {total:,}')
+        # Simpan data transaksi ke file CSV
+        with open(FILENAME, mode='a', newline='') as file_transaksi:
+            writer = csv.writer(file_transaksi)
+            writer.writerow([id_transaksi, tanggal, id_pengunjung, id_paket, jenis_paket, jumlah_orang, item_menu, total])
+        print(f'Transaksi berhasi! Total yang harus dibayar : Rp {total:,}')
+    except ValueError:
+        print('Input Tidak VAlid!!')
+        return
 

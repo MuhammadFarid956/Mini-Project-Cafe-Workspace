@@ -32,7 +32,6 @@ def next_id_pengunjung():
     try:
         with open(FILENAME, mode='r') as pengunjung_file:
             reader = csv.reader(pengunjung_file)
-            next(reader, None) #skip header
             for row in reader:
                 kode = row[0]
                 if kode.startswith('PG'):
