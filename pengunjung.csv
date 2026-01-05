@@ -14,13 +14,3 @@ PG015,adit,0851,udb
 PG016,str,str,str
 PG017,STR TEST,str test,udb
 PG018,Udin,str test,str test
-PG019,test,test,test
-PG020,test,test,test
-PG021,t,t,\
-PG022,t,r,t
-PG023,',','
-PG024,single,','
-PG025,couple,','
-PG026,double,','
-PG027,group,','
-PG028,group,','

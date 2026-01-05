@@ -44,7 +44,7 @@ def next_id_pengunjung():
 
 # Tampilkan Daftar Pengunjung
 def tampilkan_pengunjung():
-    print('\n============== Daftar Pengunjung ==============')
+    print('\n========================== Daftar Pengunjung =========================')
     if not os.path.exists(FILENAME):
         print('Pengunjung Kosong')
         return
@@ -105,4 +105,3 @@ def hapus_pengunjung():
             print('Penghapusan dibatalkan.\n')
     else:
         print('ID Pengunjung tidak ditemukan.\n')
-
