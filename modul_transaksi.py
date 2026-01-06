@@ -8,11 +8,27 @@ from modul_menu import tampilkan_menu
 FILENAME = 'data_transaksi.csv'
 
 # Pastikan file ada
-def init_file():
-    if not os.path.exists(FILENAME):
-        with open(FILENAME, mode='w', newline='') as file_transaksi:
-            writer = csv.writer(file_transaksi)
-            writer.writerow(['id_transaksi', 'tanggal', 'id_pengunjung', 'id_paket', 'jenis_paket', 'jumlah_orang', 'item_menu', 'total'])
+def load_data_transaksi():
+    data_transaksi = {}
+
+    try:
+        with open(FILENAME, mode='r') as file_transaksi:
+            reader = csv.reader(file_transaksi)
+            for row in reader:
+                id_transaksi = row[0]
+                tanggal = row[1]
+                id_pengunjung = row[2]
+                id_paket = row[3]
+                jenis_paket = row[4]
+                jumlah_orang = row[5]
+                item_menu = row[6]
+                total = row[7]
+
+                # simpan data transaksi dalam bentuk dictionary
+                data_transaksi[id_transaksi] = {'Tanggal' : tanggal, 'ID Pengunjung': id_pengunjung, 'ID Paket': id_paket, 'Jenis':jenis_paket, 'jumlah':jumlah_orang, 'items':item_menu, 'Total':total}
+    except FileNotFoundError:
+        print(f'File {FILENAME} tidak ditemukan')
+    return data_transaksi
 
 # lookup paket berdasarkan id_paket
 def lookup_paket(id_paket):
@@ -48,7 +64,7 @@ def tampilkan_transaksi():
 # Transaksi Kunjungan
 def transaksi_kunjungan():
     try:
-        init_file()
+        # init_file()
         id_transaksi = datetime.datetime.now().strftime('T%y%m%d%H%M%S')
         tanggal = datetime.date.today().isoformat()
         id_pengunjung = tambah_pengunjung()
@@ -89,4 +105,3 @@ def transaksi_kunjungan():
         print('Input Tidak VAlid!!')
         return
 
-tampilkan_transaksi()
