@@ -144,4 +144,3 @@ def hapus_menu():
             print('Penghapusan dibatalkan.\n')
     else:
         print('ID Menu tidak ditemukan.\n')
-

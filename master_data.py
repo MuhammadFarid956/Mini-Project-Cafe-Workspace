@@ -63,4 +63,3 @@ def master_data():
     except ValueError:
         print('Input Tidak Valid')
         return
-
